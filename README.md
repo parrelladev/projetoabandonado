@@ -29,27 +29,21 @@ Abra <http://127.0.0.1:4000>. O argumento `--drafts` inclui rascunhos apenas na 
 
 ## Configurar o site antes de publicar
 
-Edite `_config.yml` e substitua `url` pelo endereço real do site. Para um site de projeto, `baseurl` deve ser o caminho do repositório, por exemplo `/projetoabandonado`; para um repositório `usuario.github.io` ou domínio próprio, use `baseurl: ""`.
+O endereço configurado para este repositório é `https://parrelladev.github.io/projetoabandonado/`: `url` fica como `https://parrelladev.github.io` e `baseurl` como `/projetoabandonado`. Se escolher um domínio próprio, atualize `url` e use `baseurl: ""`.
 
 O site usa `jekyll-archives` para criar páginas por categoria e data. Esse plugin não faz parte do build nativo suportado pelo GitHub Pages. Por isso, o workflow `.github/workflows/pages.yml` compila o site com Bundler e publica o artefato usando GitHub Actions.
 
 ## Publicar no GitHub Pages
 
-1. Revise os arquivos e confira o site e o CMS localmente. O CMS não faz commits nem envios.
-2. Crie um repositório vazio no GitHub. Como esta pasta ainda não é um repositório Git, rode os comandos abaixo uma vez. Troque os dois valores de exemplo pelo seu usuário e nome do repositório:
+1. Revise os arquivos e confira o site e o CMS localmente. O CMS não faz commits nem envios. Este checkout já está ligado a `https://github.com/parrelladev/projetoabandonado` na branch `main`.
+2. Quando decidir enviar, confira `git status` e `git diff`. Adicione apenas os arquivos que revisou e quer enviar, faça o commit e então rode:
 
    ```powershell
-   git init -b main
-   git add .
-   git diff --cached --stat
-   git diff --cached
-   git commit -m "Create personal Jekyll blog"
-   git remote add origin https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git
-   git push -u origin main
+   git push origin main
    ```
 
-   Os comandos `git diff` permitem revisar o que será enviado. `git push` é a ação que envia os arquivos ao GitHub.
-3. O workflow roda quando há `push` para `main` ou quando você inicia `workflow_dispatch` na aba **Actions**. No repositório, abra **Settings → Pages** e defina **Build and deployment → Source** como **GitHub Actions**.
+   `git push origin main` envia os commits locais ao GitHub. O workflow roda após esse envio ou quando você inicia `workflow_dispatch` na aba **Actions**.
+3. No repositório, abra **Settings → Pages** e defina **Build and deployment → Source** como **GitHub Actions**.
 4. Confira a aba **Actions**. Após uma execução concluída, o Pages exibirá o endereço publicado.
 
 Para um domínio próprio, configure o domínio em **Settings → Pages**, seguindo as instruções DNS mostradas pelo GitHub. Depois ajuste `url` e `baseurl` em `_config.yml`; use `baseurl: ""`. O GitHub pode criar ou orientar o uso de um arquivo `CNAME` durante a configuração. Não adicione esse arquivo até escolher o domínio.
