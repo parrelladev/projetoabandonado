@@ -4,7 +4,6 @@ title: Todas as entradas
 description: Lista de posts publicados no Projeto Abandonado.
 permalink: /posts/
 ---
-<header class="page-intro"><p class="eyebrow">Índice geral / transmissões</p><h2>Todos os<br><span>posts</span></h2><p>Textos, registros e ideias em ordem cronológica.</p></header>
 <section class="section-block" aria-label="Posts publicados">
   <form class="search-box" role="search"><label for="post-search">Buscar posts</label><div class="search-box__row"><input id="post-search" type="search" placeholder="Título, tag ou palavra…" autocomplete="off"><span aria-hidden="true">⌕</span></div><p id="search-status" class="search-status" aria-live="polite"></p></form>
   <div class="post-list" id="post-list">{% for post in site.posts %}{% include post-card.html post=post index=forloop.index %}{% endfor %}</div>
