@@ -1,13 +1,9 @@
 ---
 layout: default
 ---
-<article class="article-shell">
-  {% assign month_index = page.date | date: '%m' | plus: 0 | minus: 1 %}{% assign month_names = 'jan,fev,mar,abr,mai,jun,jul,ago,set,out,nov,dez' | split: ',' %}
-  <header class="article-header"><p class="eyebrow">Registro / transmissão pessoal</p><h1>{{ page.title | escape }}</h1><div class="article-meta"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%d' }} {{ month_names[month_index] | upcase }} {{ page.date | date: '%Y' }}</time><span aria-hidden="true">/</span><a href="{{ '/categorias/' | append: page.categories.first | slugify: 'latin' | append: '/' | relative_url }}">{{ page.categories.first | default: 'Geral' | escape }}</a><span aria-hidden="true">/</span><span>{% assign words = content | number_of_words %}{% assign minutes = words | divided_by: 200.0 | ceil %}{% if minutes < 1 %}{% assign minutes = 1 %}{% endif %}{{ minutes }} MIN DE LEITURA</span></div>
-  {% if page.image and page.image != '/assets/images/og-cover.svg' %}<figure class="article-cover"><img src="{{ page.image | relative_url }}" alt="{{ page.image_alt | default: page.title | escape }}"><figcaption>{{ page.image_caption | default: page.title | escape }}</figcaption></figure>{% endif %}
-  {% if page.excerpt %}<p class="article-summary">{{ page.excerpt | strip_html | escape }}</p>{% endif %}</header>
-  <div class="prose article-content">{{ content }}</div>
-  {% if page.tags.size > 0 %}<footer class="article-tags"><span class="eyebrow">Marcadores</span><ul>{% for tag in page.tags %}<li>{{ tag | escape }}</li>{% endfor %}</ul></footer>{% endif %}
-  <p class="article-end">Fim da entrada // {{ page.date | date: '%y%m%d' }}</p>
-</article>
-<nav class="post-nav" aria-label="Navegação entre posts">{% if page.previous.url %}<a href="{{ page.previous.url | relative_url }}"><span aria-hidden="true">←</span> Entrada anterior</a>{% else %}<span></span>{% endif %}<a href="{{ '/posts/' | relative_url }}">Todas as entradas <span aria-hidden="true">→</span></a>{% if page.next.url %}<a class="post-nav__next" href="{{ page.next.url | relative_url }}">Próxima entrada <span aria-hidden="true">→</span></a>{% endif %}</nav>
+{% include article-content.html post=page %}
+<nav class="post-nav" aria-label="Navegação entre posts">
+  {% if page.previous.url %}<a href="{{ page.previous.url | relative_url }}"><span aria-hidden="true">←</span> Post mais antigo</a>{% endif %}
+  <a href="{{ '/posts/' | relative_url }}">Todos os posts</a>
+  {% if page.next.url %}<a class="post-nav__next" href="{{ page.next.url | relative_url }}">Post mais recente <span aria-hidden="true">→</span></a>{% endif %}
+</nav>

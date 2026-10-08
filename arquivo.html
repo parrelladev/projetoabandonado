@@ -1,8 +1,0 @@
----
-layout: default
-title: Arquivo cronológico
-description: Navegue pelas entradas em ordem de data.
-permalink: /arquivo/
----
-<header class="page-intro"><p class="eyebrow">Linha do tempo</p><h1>Arquivo<br><span>cronológico</span></h1><p>Uma linha do tempo das ideias registradas.</p></header>
-<section class="section-block"><ul class="category-index">{% assign years = site.posts | group_by_exp: 'post', "post.date | date: '%Y'" %}{% for year in years %}<li><a href="{{ '/arquivo/' | append: year.name | append: '/' | relative_url }}"><span>{{ year.name }}</span><span class="mono">{{ year.items.size }} {% if year.items.size == 1 %}entrada{% else %}entradas{% endif %}</span></a></li>{% endfor %}</ul>{% if site.posts.size == 0 %}<p class="empty-state">O arquivo será preenchido após a primeira publicação.</p>{% endif %}</section>

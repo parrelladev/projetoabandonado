@@ -1,8 +1,0 @@
----
-layout: default
-title: Categorias
-description: Explore as entradas por categoria.
-permalink: /categorias/
----
-<header class="page-intro"><p class="eyebrow">Índice temático</p><h1>Por<br><span>categoria</span></h1><p>Assuntos que atravessam este arquivo.</p></header>
-<section class="section-block"><ul class="category-index">{% for category in site.categories %}{% assign category_name = category[0] %}{% assign category_posts = category[1] %}<li><a href="{{ '/categorias/' | append: category_name | slugify: 'latin' | append: '/' | relative_url }}"><span>{{ category_name }}</span><span class="mono">{{ category_posts.size }} {% if category_posts.size == 1 %}entrada{% else %}entradas{% endif %}</span></a></li>{% endfor %}</ul>{% if site.categories.size == 0 %}<p class="empty-state">As categorias aparecerão aqui quando houver posts publicados.</p>{% endif %}</section>

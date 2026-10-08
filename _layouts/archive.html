@@ -1,6 +1,0 @@
----
-layout: default
----
-{% if page.type == 'year' %}{% assign archive_heading = page.date | date: '%Y' %}{% elsif page.type == 'month' %}{% assign archive_heading = page.date | date: '%m/%Y' %}{% else %}{% assign archive_heading = page.title | default: 'arquivo' %}{% endif %}
-<header class="page-intro"><p class="eyebrow">Índice / {{ page.type | default: 'arquivo' }}</p><h1>{{ archive_heading | escape }}<br><span>arquivo</span></h1><p>Entradas reunidas neste índice.</p></header>
-<section class="section-block"><div class="post-list">{% for post in page.posts %}{% include post-card.html post=post index=forloop.index %}{% endfor %}</div>{% if page.posts.size == 0 %}<p class="empty-state">Nenhuma entrada neste recorte.</p>{% endif %}</section>

@@ -1,5 +1,4 @@
 ---
-category: vida
 date: '2026-10-08'
 excerpt: Faz uma semana que, ironicamente, me lembrei da existência deste blog. Eram
   exatamente três da manhã e, enquanto aproveitava minhas férias, acabei lendo novamente

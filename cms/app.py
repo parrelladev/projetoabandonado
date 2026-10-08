@@ -44,7 +44,7 @@ SHELL = """<!doctype html>
 </body></html>"""
 
 HOME = """<div class="toolbar"><div><p class="subtle">Editor local · os arquivos permanecem neste computador</p><h1>Entradas</h1></div><a class="button primary" href="{{ url_for('editor') }}">+ Escrever</a></div>
-{% if posts %}<table class="post-table"><thead><tr><th>Título</th><th>Data</th><th>Categoria</th><th>Estado</th><th>Ações</th></tr></thead><tbody>{% for item in posts %}<tr><td><a href="{{ url_for('editor', kind=item.kind, filename=item.filename) }}">{{ item.title }}</a></td><td>{{ item.date }}</td><td>{{ item.category or '—' }}</td><td><span class="badge">{{ 'Rascunho' if item.kind == 'draft' else 'Publicado' }}</span></td><td class="actions"><a href="{{ url_for('editor', kind=item.kind, filename=item.filename) }}">Editar</a>{% if item.kind == 'post' %}<a href="{{ item.url }}" target="_blank" rel="noreferrer">Abrir</a>{% endif %}<form action="{{ url_for('delete_post') }}" method="post" style="display:inline" onsubmit="return confirm('Excluir esta entrada? Esta ação não pode ser desfeita.');"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><input type="hidden" name="kind" value="{{ item.kind }}"><input type="hidden" name="filename" value="{{ item.filename }}"><button class="danger" type="submit">Excluir</button></form></td></tr>{% endfor %}</tbody></table>{% else %}<div class="empty">Ainda não há entradas. Crie um rascunho para começar.</div>{% endif %}
+{% if posts %}<table class="post-table"><thead><tr><th>Título</th><th>Data</th><th>Estado</th><th>Ações</th></tr></thead><tbody>{% for item in posts %}<tr><td><a href="{{ url_for('editor', kind=item.kind, filename=item.filename) }}">{{ item.title }}</a></td><td>{{ item.date }}</td><td><span class="badge">{{ 'Rascunho' if item.kind == 'draft' else 'Publicado' }}</span></td><td class="actions"><a href="{{ url_for('editor', kind=item.kind, filename=item.filename) }}">Editar</a>{% if item.kind == 'post' %}<a href="{{ item.url }}" target="_blank" rel="noreferrer">Abrir</a>{% endif %}<form action="{{ url_for('delete_post') }}" method="post" style="display:inline" onsubmit="return confirm('Excluir esta entrada? Esta ação não pode ser desfeita.');"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><input type="hidden" name="kind" value="{{ item.kind }}"><input type="hidden" name="filename" value="{{ item.filename }}"><button class="danger" type="submit">Excluir</button></form></td></tr>{% endfor %}</tbody></table>{% else %}<div class="empty">Ainda não há entradas. Crie um rascunho para começar.</div>{% endif %}
 <p class="hint">O CMS não envia arquivos ao GitHub. Publique pelo seu fluxo Git habitual, quando decidir.</p>"""
 
 EDITOR = """<p><a href="{{ url_for('home') }}">← Todas as entradas</a></p><h1>{{ 'Editar entrada' if editing else 'Nova entrada' }}</h1>
@@ -54,7 +54,7 @@ EDITOR = """<p><a href="{{ url_for('home') }}">← Todas as entradas</a></p><h1>
 <div class="field"><label for="title">Título</label><input id="title" name="title" required maxlength="160" value="{{ item.title if item else '' }}"></div>
 <div class="grid-two"><div class="field"><label for="date">Data</label><input id="date" name="date" type="date" required value="{{ item.date if item else today }}"></div><div class="field"><label for="kind">Estado</label><select id="kind" name="kind"><option value="draft" {% if not item or item.kind == 'draft' %}selected{% endif %}>Rascunho</option><option value="post" {% if item and item.kind == 'post' %}selected{% endif %}>Publicado</option></select></div></div>
 <div class="field"><label for="excerpt">Resumo</label><textarea id="excerpt" name="excerpt" rows="2" maxlength="300">{{ item.excerpt if item else '' }}</textarea></div>
-<div class="grid-two"><div class="field"><label for="category">Categoria</label><input id="category" name="category" required value="{{ item.category if item else '' }}" placeholder="Ex.: tecnologia"></div><div class="field"><label for="tags">Tags</label><input id="tags" name="tags" value="{{ item.tags if item else '' }}" placeholder="design, ideias, diário"></div></div>
+<div class="field"><label for="tags">Tags</label><input id="tags" name="tags" value="{{ item.tags if item else '' }}" placeholder="design, ideias, diário"></div>
 <div class="field"><label for="image">Imagem (caminho ou URL)</label><input id="image" name="image" value="{{ item.image if item else '/assets/images/og-cover.svg' }}" placeholder="/assets/images/minha-imagem.jpg"></div>
 <div class="field"><label for="image_alt">Descrição da imagem</label><input id="image_alt" name="image_alt" value="{{ item.image_alt if item else '' }}"></div>
 <div class="field"><label for="body">Texto em Markdown</label><textarea id="body" name="body" required>{{ item.body if item else '' }}</textarea></div>
@@ -65,7 +65,7 @@ const bodyField=document.getElementById('body'),preview=document.getElementById(
 bodyField.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(async()=>{try{const response=await fetch('{{ url_for('preview') }}',{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':csrf},body:JSON.stringify({body:bodyField.value})});if(response.ok){preview.innerHTML=(await response.json()).html}}catch(error){preview.textContent='Não foi possível atualizar a prévia.'}},180)});
 </script>"""
 
-HELP = """<p><a href="{{ url_for('home') }}">← Todas as entradas</a></p><h1>Como usar o CMS</h1><ol><li>Na lista, selecione <strong>Escrever</strong> para criar uma entrada.</li><li>Preencha título, data, resumo, categoria, tags e imagem. Escreva o corpo em Markdown.</li><li>Veja a prévia à direita. Escolha “Rascunho” ou “Publicado” e salve.</li><li>Edite uma entrada na lista. Para excluir, use “Excluir” e confirme.</li><li>Para conferir o layout final do Jekyll, inicie o site local em outro terminal com <code>bundle exec jekyll serve --drafts --baseurl ""</code>.</li></ol><p>O CMS só altera arquivos no seu computador. Ele não faz commit, push ou deploy.</p>"""
+HELP = """<p><a href="{{ url_for('home') }}">← Todas as entradas</a></p><h1>Como usar o CMS</h1><ol><li>Na lista, selecione <strong>Escrever</strong> para criar uma entrada.</li><li>Preencha título, data, resumo, tags e imagem. Escreva o corpo em Markdown.</li><li>Veja a prévia à direita. Escolha “Rascunho” ou “Publicado” e salve.</li><li>Edite uma entrada na lista. Para excluir, use “Excluir” e confirme.</li><li>Para conferir o layout final do Jekyll, inicie o site local em outro terminal com <code>bundle exec jekyll serve --drafts --baseurl ""</code>.</li></ol><p>O CMS só altera arquivos no seu computador. Ele não faz commit, push ou deploy.</p>"""
 
 
 def csrf_token() -> str:
@@ -127,7 +127,7 @@ def list_entries() -> list[dict[str, str]]:
             except Exception:
                 continue
             post_date = str(post.get("date", ""))[:10]
-            entries.append({"kind": kind, "filename": path.name, "title": str(post.get("title", path.stem)), "date": post_date, "category": str(post.get("category", ""))})
+            entries.append({"kind": kind, "filename": path.name, "title": str(post.get("title", path.stem)), "date": post_date})
     return sorted(entries, key=lambda entry: (entry["date"], entry["title"].casefold()), reverse=True)
 
 
@@ -167,7 +167,6 @@ def editor() -> str:
             "title": post.get("title", ""),
             "date": str(post.get("date", date.today()))[:10],
             "excerpt": post.get("excerpt", ""),
-            "category": post.get("category", ""),
             "tags": ", ".join(str(tag) for tag in tags),
             "image": post.get("image", "/assets/images/og-cover.svg"),
             "image_alt": post.get("image_alt", ""),
@@ -188,13 +187,12 @@ def save_post():
     title = request.form.get("title", "").strip()
     body = request.form.get("body", "").strip()
     excerpt = request.form.get("excerpt", "").strip()
-    category = request.form.get("category", "").strip()
     image = request.form.get("image", "").strip() or "/assets/images/og-cover.svg"
     image_alt = request.form.get("image_alt", "").strip()
     kind = request.form.get("kind", "draft")
     date_text = request.form.get("date", "")
-    if not title or not body or not category or kind not in {"draft", "post"}:
-        flash("Preencha título, texto, categoria e estado.")
+    if not title or not body or kind not in {"draft", "post"}:
+        flash("Preencha título, texto e estado.")
         return redirect(url_for("editor"))
     try:
         published_date = date.fromisoformat(date_text)
@@ -206,7 +204,7 @@ def save_post():
     original_filename = request.form.get("original_filename", "")
     old_path = safe_existing_path(original_kind, original_filename) if original_kind and original_filename else None
     tags = [part.strip() for part in request.form.get("tags", "").split(",") if part.strip()]
-    metadata = {"title": title, "date": published_date.isoformat(), "excerpt": excerpt, "image": image, "image_alt": image_alt, "category": category, "tags": tags}
+    metadata = {"title": title, "date": published_date.isoformat(), "excerpt": excerpt, "image": image, "image_alt": image_alt, "tags": tags}
     document = frontmatter.Post(body, **metadata)
     slug = slugify(title)
     filename = f"{published_date.isoformat()}-{slug}.md" if kind == "post" else f"{slug}.md"

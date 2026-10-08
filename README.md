@@ -1,6 +1,6 @@
 # Projeto Abandonado
 
-Blog pessoal em Jekyll, em português, com um CMS local em Python. O CMS só escuta em `127.0.0.1`; ele não envia conteúdo ao GitHub nem publica o site.
+Blog pessoal em Jekyll, em português, com um CMS local em Python. A homepage abre o post mais recente. O menu **Posts** mostra todas as publicações. O CMS só escuta em `127.0.0.1`; ele não envia conteúdo ao GitHub nem publica o site.
 
 ## Escrever com o CMS
 
@@ -14,7 +14,7 @@ python -m venv .venv
 .\.venv\Scripts\python.exe cms\app.py
 ```
 
-Abra <http://127.0.0.1:8765>. Use **Escrever** para criar uma entrada. Preencha título, data, resumo, categoria, tags e imagem; digite o corpo em Markdown e veja a prévia ao lado. Escolha **Rascunho** ou **Publicado** e salve. A lista permite editar ou excluir entradas.
+Abra <http://127.0.0.1:8765>. Use **Escrever** para criar uma entrada. Preencha título, data, resumo, tags e imagem; digite o corpo em Markdown e veja a prévia ao lado. Escolha **Rascunho** ou **Publicado** e salve. A lista permite editar ou excluir entradas.
 
 O CMS salva rascunhos em `_drafts/` e posts em `_posts/`. Ao marcar uma entrada como publicada, o CMS a move para `_posts/`. O servidor fica disponível apenas no computador local. Pressione `Ctrl+C` no terminal para encerrá-lo.
 
@@ -31,7 +31,7 @@ Abra <http://127.0.0.1:4000>. O argumento `--drafts` inclui rascunhos apenas na 
 
 O endereço configurado para este repositório é `https://parrelladev.github.io/projetoabandonado/`: `url` fica como `https://parrelladev.github.io` e `baseurl` como `/projetoabandonado`. Se escolher um domínio próprio, atualize `url` e use `baseurl: ""`.
 
-O site usa `jekyll-archives` para criar páginas por categoria e data. Esse plugin não faz parte do build nativo suportado pelo GitHub Pages. Por isso, o workflow `.github/workflows/pages.yml` compila o site com Bundler e publica o artefato usando GitHub Actions.
+O workflow `.github/workflows/pages.yml` compila o site com Bundler e publica o artefato usando GitHub Actions. A homepage mostra o post mais recente completo e leva ao post anterior. A página **Posts** lista todas as publicações e inclui busca. Os posts usam URLs como `/posts/2026/10/08/titulo/`.
 
 ## Publicar no GitHub Pages
 
@@ -46,7 +46,7 @@ O site usa `jekyll-archives` para criar páginas por categoria e data. Esse plug
 3. No repositório, abra **Settings → Pages** e defina **Build and deployment → Source** como **GitHub Actions**.
 4. Confira a aba **Actions**. Após uma execução concluída, o Pages exibirá o endereço publicado.
 
-Para um domínio próprio, configure o domínio em **Settings → Pages**, seguindo as instruções DNS mostradas pelo GitHub. Depois ajuste `url` e `baseurl` em `_config.yml`; use `baseurl: ""`. O GitHub pode criar ou orientar o uso de um arquivo `CNAME` durante a configuração. Não adicione esse arquivo até escolher o domínio.
+Para um domínio próprio, configure o domínio em **Settings → Pages**, seguindo as instruções DNS mostradas pelo GitHub. Depois ajuste `url` e `baseurl` em `_config.yml`; use `baseurl: ""`.
 
 ## Estrutura
 
@@ -66,7 +66,6 @@ date: 2026-10-08
 excerpt: Resumo curto para listagens e mecanismos de busca.
 image: /assets/images/minha-imagem.jpg
 image_alt: Descrição da imagem
-category: tecnologia
 tags:
   - interfaces
   - ideias
