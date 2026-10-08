@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs><linearGradient id="a" x1="0" x2="1"><stop stop-color="#8755cf"/><stop offset="1" stop-color="#c7f45a"/></linearGradient><pattern id="g" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M36 0H0v36" fill="none" stroke="#252525" stroke-width="1"/></pattern></defs>
+  <path fill="#0a0a0a" d="M0 0h1200v630H0z"/><path fill="url(#g)" d="M0 0h1200v630H0z"/><text x="90" y="165" fill="#c7f45a" font-family="monospace" font-size="22" letter-spacing="4">ARQUIVO PESSOAL / TRANSMISSÃO ABERTA</text><text x="84" y="320" fill="url(#a)" font-family="Arial,sans-serif" font-weight="700" font-size="104">PROJETO</text><text x="84" y="430" fill="url(#a)" font-family="Arial,sans-serif" font-weight="700" font-size="104">ABANDONADO</text><path stroke="url(#a)" stroke-width="5" d="M90 490h1020"/>
+</svg>

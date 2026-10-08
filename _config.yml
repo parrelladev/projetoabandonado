@@ -1,0 +1,57 @@
+title: Projeto Abandonado
+description: Um espaço pessoal para registrar ideias, interfaces, tecnologia e cultura visual.
+lang: pt-BR
+locale: pt_BR
+timezone: America/Sao_Paulo
+url: https://SEU_USUARIO.github.io
+baseurl: /projetoabandonado
+logo: /assets/images/og-cover.svg
+twitter:
+  card: summary_large_image
+social:
+  name: Projeto Abandonado
+author:
+  name: Projeto Abandonado
+  bio: Um arquivo pessoal de ideias e transmissões.
+  url: ""
+markdown: kramdown
+permalink: /:categories/:year/:month/:day/:title/
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      image: /assets/images/og-cover.svg
+      comments: false
+plugins:
+  - jekyll-archives
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+jekyll-archives:
+  enabled: [year, month, categories]
+  slug_mode: latin
+  layouts:
+    year: archive
+    month: archive
+    category: archive
+  permalinks:
+    year: /arquivo/:year/
+    month: /arquivo/:year/:month/
+    category: /categorias/:name/
+feed:
+  path: feed.xml
+  excerpt_only: true
+exclude:
+  - cms/
+  - README.md
+  - requirements.txt
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .venv
+  - venv
+  - node_modules
+  - __pycache__
+  - .github

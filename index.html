@@ -1,0 +1,18 @@
+---
+layout: default
+title: Início
+description: Ideias, registros e transmissões pessoais.
+---
+<section class="hero" aria-labelledby="home-title">
+  <p class="eyebrow">Arquivo pessoal / transmissão aberta</p>
+  <h1 id="home-title">Projeto<br><span>Abandonado</span></h1>
+  <p class="hero__copy">Um espaço para escrever sobre interfaces, tecnologia, cultura visual e ideias que talvez tenham sido abandonadas cedo demais.</p>
+  <a class="text-link" href="{{ '/posts/' | relative_url }}">Explorar transmissões <span aria-hidden="true">→</span></a>
+</section>
+<section class="section-block" aria-labelledby="latest-title">
+  <div class="section-heading"><div><p class="eyebrow">Sinal recente</p><h2 id="latest-title">Últimas entradas</h2></div><a class="text-link" href="{{ '/posts/' | relative_url }}">Ver todas <span aria-hidden="true">→</span></a></div>
+  {% assign latest_posts = site.posts | slice: 0, 5 %}
+  {% if latest_posts.size > 0 %}<div class="post-list">{% for post in latest_posts %}{% include post-card.html post=post index=forloop.index %}{% endfor %}</div>
+  {% else %}<div class="empty-state"><p>Ainda não há entradas publicadas.</p><p>Abra o CMS local para escrever a primeira.</p></div>{% endif %}
+</section>
+<section class="signal-band"><p class="eyebrow">Frequências</p><h2>Notas sobre o que permanece.</h2><a class="text-link" href="{{ '/sobre/' | relative_url }}">Conheça o projeto <span aria-hidden="true">→</span></a></section>

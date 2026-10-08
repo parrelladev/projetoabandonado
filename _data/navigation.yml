@@ -1,0 +1,10 @@
+- title: Início
+  url: /
+- title: Posts
+  url: /posts/
+- title: Categorias
+  url: /categorias/
+- title: Arquivo
+  url: /arquivo/
+- title: Sobre
+  url: /sobre/

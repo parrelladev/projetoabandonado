@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'pt-BR' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0a0a0a">
+    {% seo %}
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    <link rel="alternate" type="application/atom+xml" title="{{ site.title | escape }}" href="{{ '/feed.xml' | relative_url }}">
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="{{ '/' | relative_url }}"><span class="brand__mark" aria-hidden="true">[ PA ]</span><span>{{ site.title }}</span></a>
+        <span class="entry-code">ARQUIVO / 001</span>
+      </header>
+      <nav class="primary-nav" aria-label="Navegação principal"><ul>{% for item in site.data.navigation %}<li><a href="{{ item.url | relative_url }}" {% if page.url == item.url %}aria-current="page"{% endif %}>{{ item.title }}</a></li>{% endfor %}<li><a href="{{ '/feed.xml' | relative_url }}">RSS</a></li></ul></nav>
+      <main id="main-content" tabindex="-1">{{ content }}</main>
+      <footer class="site-footer">
+        <section class="footer-about" aria-labelledby="footer-about-title"><p class="eyebrow">Sobre o autor</p><h2 id="footer-about-title">Projeto Abandonado</h2><p>Um espaço pessoal para registrar ideias, interfaces, tecnologia e cultura visual.</p><div class="footer-links"><a href="{{ '/sobre/' | relative_url }}">Sobre <span aria-hidden="true">↗</span></a><a href="{{ '/feed.xml' | relative_url }}">RSS <span aria-hidden="true">↗</span></a></div></section>
+        <div class="footer-line"><span>Projeto Abandonado / {{ 'now' | date: '%Y' }}</span><span>Status do sistema: em andamento</span></div>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+_site/
+.jekyll-cache/
+.sass-cache/
+.bundle/
+vendor/
+__pycache__/
+.venv/
+venv/
+*.py[cod]
+.DS_Store
+Thumbs.db
