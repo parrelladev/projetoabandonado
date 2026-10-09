@@ -3,7 +3,7 @@ layout: default
 ---
 {% include article-content.html post=page %}
 <nav class="post-nav" aria-label="Navegação entre posts">
-  {% if page.previous.url %}<a class="post-nav__older" href="{{ page.previous.url | relative_url }}"><span aria-hidden="true">←</span> Post mais antigo</a>{% endif %}
+  {% if page.previous.url %}<a class="post-nav__older" href="{{ page.previous.url | relative_url }}"><span aria-hidden="true">→</span> Post mais antigo</a>{% endif %}
   <a class="post-nav__all" href="{{ '/posts/' | relative_url }}">Todos os posts</a>
-  {% if page.next.url %}<a class="post-nav__newer" href="{{ page.next.url | relative_url }}">Post mais recente <span aria-hidden="true">→</span></a>{% endif %}
+  {% if page.next.url %}<a class="post-nav__newer" href="{{ page.next.url | relative_url }}">Post mais recente <span aria-hidden="true">←</span></a>{% endif %}
 </nav>
