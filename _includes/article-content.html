@@ -10,7 +10,7 @@
       <span aria-hidden="true">/</span>
       <span>{% assign words = post.content | number_of_words %}{% assign minutes = words | divided_by: 200.0 | ceil %}{% if minutes < 1 %}{% assign minutes = 1 %}{% endif %}{{ minutes }} MIN DE LEITURA</span>
     </div>
-    {% if post.image and post.image != '/assets/images/og-cover.svg' %}<figure class="article-cover"><img src="{{ post.image | relative_url }}" alt="{{ post.image_alt | default: post.title | escape }}"><figcaption>{{ post.image_caption | default: post.title | escape }}</figcaption></figure>{% endif %}
+    {% if post.image and post.image != '/assets/images/og-cover.svg' %}{% unless post.content contains post.image %}<figure class="article-cover"><img src="{{ post.image | relative_url }}" alt="{{ post.image_alt | default: post.title | escape }}"><figcaption>{{ post.image_caption | default: post.title | escape }}</figcaption></figure>{% endunless %}{% endif %}
     {% if post.excerpt %}<p class="article-summary">{{ post.excerpt | strip_html | escape }}</p>{% endif %}
   </header>
   <div class="prose article-content">{{ post.content }}</div>
